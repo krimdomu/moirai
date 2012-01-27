@@ -1,0 +1,49 @@
+=pod
+
+Moirai is a library to ease the monitoring of services.
+
+=head2 Example
+
+ #!/usr/bin/perl
+    
+ use Moirai;
+ use Moirai::Monitor::HTTP;
+ use Moirai::Notification::EMail;
+    
+ use base qw(Moirai);
+    
+ Moirai::Notification::EMail->configure(
+    from => 'xxx',
+    to   => 'xxx',
+    smtp => 'xxx',
+     user => 'xxx',
+    password => 'xxx',
+    auth => 'PLAIN',
+ );
+     
+ Service(
+    name    => "google-search-latency",
+    monitor => HTTP(
+       GET     => "http://www.google.com/",
+       freq    => Time->seconds(1),
+       timeout => Time->ms(10),
+       fail    => sub {
+          say "Google search query took more thant 80ms.";
+     
+          # notify only on 5 failures during 10 seconds
+          Incident(
+             errors => 5,
+             during => Time->seconds(10),
+             actions => sub {
+                say "Fail Alert";
+                EMail(
+                   subject => "Google search failed.",
+                );
+             }
+          ),
+       },
+    )
+ );
+    
+ run;
+
