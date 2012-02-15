@@ -9,6 +9,8 @@ package Moirai;
 use strict;
 use warnings;
 
+use Moirai::Size;
+use Moirai::Process;
 use Moirai::Time;
 use Moirai::Service;
 use Moirai::Logger;
@@ -19,7 +21,7 @@ require Exporter;
 use base qw(Exporter);
 use vars qw(@EXPORT);
 
-@EXPORT = qw(Service Incident Time say run);
+@EXPORT = qw(Service Incident Time Size Process say run);
 
 use vars qw(@services $log_file);
 
@@ -70,6 +72,14 @@ sub Incident {
 
 sub Time {
    return Moirai::Time->new;
+}
+
+sub Size {
+   return Moirai::Size->new;
+}
+
+sub Process {
+   return Moirai::Process->new;
 }
 
 sub say {
