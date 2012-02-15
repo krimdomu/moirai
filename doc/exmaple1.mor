@@ -14,18 +14,16 @@ Moirai::Notification::EMail->configure(
    user => 'xxx',
    password => 'xxx',
    auth => 'PLAIN',
+   ssl  => 1,
 );
 
-#Moirai::Collector::Native->configure(
-#   server => "moirai.foobar.de",
-#);
 
 Service(
    name    => "google-search-latency",
    monitor => HTTP(
       GET     => "http://www.google.com/",
       freq    => Time->seconds(1),
-      timeout => Time->ms(10),
+      timeout => Time->ms(80),
       fail    => sub {
          say "Google search query took more thant 80ms.";
 
@@ -37,6 +35,7 @@ Service(
                say "Fail Alert";
                EMail(
                   subject => "Google search failed.",
+                  template => "/path/to/template/test.tpl",
                );
             }
          ),
