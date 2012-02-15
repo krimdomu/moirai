@@ -1,9 +1,12 @@
 #!/usr/bin/perl
 
 use Moirai;
-#use Moirai::Collector::Native;
+use Moirai::Logger;
 use Moirai::Monitor::HTTP;
+use Moirai::Monitor::Memory;
 use Moirai::Notification::EMail;
+
+use Rex::Commands::Service;
 
 use base qw(Moirai);
 
@@ -32,15 +35,36 @@ Service(
             errors => 5,
             during => Time->seconds(10),
             actions => sub {
-               say "Fail Alert";
                EMail(
                   subject => "Google search failed.",
-                  template => "/path/to/template/test.tpl",
                );
             }
          ),
       },
    )
 );
+
+Service(
+   name    => "foo-memory",
+   monitor => Memory(
+      pid        => Process->pid("/usr/bin/foo"),
+      freq       => Time->seconds(1),
+      max_memory => Size->MB(50),
+      fail       => sub {
+         say "Foo uses too much memory";
+
+         # restart foo if 5 errors during 60 seconds
+         Incident(
+            errors => 5,
+            during => Time->seconds(60),
+            actions => sub {
+               service foo => "restart";
+            }
+         ),
+      },
+   )
+);
+
+
 
 run;
