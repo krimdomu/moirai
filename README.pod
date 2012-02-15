@@ -16,7 +16,7 @@ Moirai is a library to ease the monitoring of services.
     from => 'xxx',
     to   => 'xxx',
     smtp => 'xxx',
-     user => 'xxx',
+    user => 'xxx',
     password => 'xxx',
     auth => 'PLAIN',
  );
