@@ -1,0 +1,19 @@
+Source: moirai
+Section: admin
+Priority: optional
+Maintainer: Jan Gehring <jan.gehring@gmail.com>
+Build-Depends: debhelper (>= 7),
+                  rex (>= 0.24)
+Standards-Version: 3.9.1
+Homepage: http://moirai.pl/
+
+Package: moirai
+Architecture: all
+Depends: ${misc:Depends},
+            ${perl:Depends},
+            rex (>= 0.24)
+Description: simple small script based monitoring tool
+ With Moirai you can build small recipes to monitor your services and to 
+ respond to failures.
+ .
+ You can find examples and howtos on http://moirai.pl/.
