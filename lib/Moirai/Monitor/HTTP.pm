@@ -4,6 +4,32 @@
 # vim: set ts=3 sw=3 tw=0:
 # vim: set expandtab:
    
+=head1 NAME
+
+Moirai::Monitor::HTTP - Helper Functions to monitor HTTP.
+
+=head1 DESCRIPTION
+
+With this class you can monitor HTTP Services.
+
+=head1 SYNOPSIS
+
+    HTTP(
+       GET     => "http://www.google.com/",
+       freq    => Time->seconds(1),
+       timeout => Time->ms(10),
+       fail    => sub {
+          # do something on a failure
+       },
+    );
+
+=head1 EXPORTED FUNCTIONS
+
+=over 4
+
+=cut
+
+
 package Moirai::Monitor::HTTP;
    
 use strict;
@@ -30,6 +56,12 @@ sub new {
    return $self;
 }
 
+=item HTTP
+
+Monitor HTTP Services.
+
+=cut
+
 sub HTTP {
    return Moirai::Monitor::HTTP->new(@_);
 }
@@ -48,5 +80,8 @@ sub _check {
    return $resp; # fail
 }
 
+=back
+
+=cut
 
 1;

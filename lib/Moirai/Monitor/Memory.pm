@@ -3,6 +3,33 @@
 # 
 # vim: set ts=3 sw=3 tw=0:
 # vim: set expandtab:
+
+=head1 NAME
+
+Moirai::Monitor::Memory - Helper Functions to monitor memory usage of a process.
+
+=head1 DESCRIPTION
+
+With this class you can monitor memory usage of a process.
+
+=head1 SYNOPSIS
+
+   Memory(
+      pid        => Process->pid("/usr/bin/foo"),
+      freq       => Time->seconds(1),
+      max_memory => Size->MB(50),
+      fail       => sub {
+         # do something on a failure
+      },
+   );
+
+=head1 EXPORTED FUNCTIONS
+
+=over 4
+
+=cut
+
+
    
 package Moirai::Monitor::Memory;
    
@@ -30,6 +57,11 @@ sub new {
    return $self;
 }
 
+=item Memory
+
+Monitor Memory of a process.
+
+=cut
 sub Memory {
    return Moirai::Monitor::Memory->new(@_);
 }
@@ -48,5 +80,8 @@ sub _check {
    return $process->{rss};
 }
 
+=back
+
+=cut
 
 1;

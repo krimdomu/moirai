@@ -3,7 +3,54 @@
 # 
 # vim: set ts=3 sw=3 tw=0:
 # vim: set expandtab:
+
+=head1 NAME
+
+Moirai::Notification::EMail - Helper Functions to send mails.
+
+=head1 DESCRIPTION
+
+This class helps you sending mails on check failure.
+
+=head1 SYNOPSIS
+
+Configure the EMail Notification the following way.
+
+ Moirai::Notification::EMail->configure(
+    from => 'sender@bar.tld',
+    to   => 'recipient@foo.tld',
+    smtp => 'smtp.your.server.tld',
+    user => 'smtpuser',
+    password => 'smtppass',
+    auth => 'PLAIN',
+    ssl => 1,   # optional, to use ssl
+ );
+
+Use it in your Recipe the following way.
+
+ EMail(
+    subject => "Subject of the email",
+ );
    
+ EMail(
+    subject => "Subject of the email",
+    template => "/path/to/a/template/for/the/mail/body.tpl",
+    additional_template_var1 => "foo",
+    additional_template_var2 => "bar",
+ );
+
+Your template could look like this:
+
+ There is something going wrong.
+ Addition info 1: <%= $::additional_template_var1 %>
+ Addition info 2: <%= $::additional_template_var2 %>
+
+=head1 EXPORTED FUNCTIONS
+
+=over 4
+
+=cut
+
 package Moirai::Notification::EMail;
    
 use strict;
@@ -21,6 +68,11 @@ use Data::Dumper;
 
 @EXPORT = qw(EMail);
 
+=item EMail(%option)
+
+Function to send emails.
+
+=cut
 sub EMail {
    my (%option) = @_;
 
@@ -88,5 +140,9 @@ sub _generate_mail_content {
 
    return $s;
 }
+
+=back
+
+=cut
 
 1;
