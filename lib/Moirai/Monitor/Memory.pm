@@ -15,7 +15,6 @@ use vars qw(@EXPORT);
 
 use Rex::Commands::Process;
 use Moirai::Monitor;
-use LWP::UserAgent;
 use Data::Dumper;
 use base qw(Moirai::Monitor);
     

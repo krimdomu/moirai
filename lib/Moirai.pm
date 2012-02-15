@@ -21,6 +21,8 @@ require Exporter;
 use base qw(Exporter);
 use vars qw(@EXPORT);
 
+our $VERSION = "0.0.1";
+
 @EXPORT = qw(Service Incident Time Size Process say run);
 
 use vars qw(@services $log_file);
