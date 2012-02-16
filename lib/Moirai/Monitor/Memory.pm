@@ -17,7 +17,7 @@ With this class you can monitor memory usage of a process.
    Memory(
       pid        => Process->pid("/usr/bin/foo"),
       freq       => Time->seconds(1),
-      max_memory => Size->MB(50),
+      max        => Size->MB(50),
       fail       => sub {
          # do something on a failure
       },
@@ -71,7 +71,7 @@ sub _check {
 
    my ($process) = grep { $_->{pid} == $self->{pid} } ps();
 
-   if($process->{rss} <= $self->{max_memory}) {
+   if($process->{rss} <= $self->{max}) {
       # erverything's green
       return 0;
    }
