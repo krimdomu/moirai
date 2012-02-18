@@ -5,6 +5,7 @@ my %deps = (
                   'Net::SMTP_auth' => 0,
                   'Net::SMTP_auth::SSL' => 0,
                   'LWP::UserAgent' => 0,
+                  'Time::HiRes' => 0,
 );
 
 WriteMakefile1(
