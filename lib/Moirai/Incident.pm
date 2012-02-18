@@ -29,7 +29,6 @@ sub run {
    $self->{failcounter}++;
 
    if($self->{firstfail} + $self->{during} <= time()) {
-   print "update time... " . $self->{firstfail} . "\n";
       $self->{firstfail} = time();
    }
 
