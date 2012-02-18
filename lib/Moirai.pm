@@ -204,9 +204,11 @@ sub run {
    my $pid = fork;
    unless($pid) {
 
-      # close STD* handles
-      close(STDOUT);
-      close(STDERR);
+      unless($opts->{debug}) {
+         # close STD* handles only if not running in debug mode
+         close(STDOUT);
+         close(STDERR);
+      }
 
       for my $service (@services) {
          $service->run(%{ $opts });
