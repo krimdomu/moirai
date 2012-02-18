@@ -9,6 +9,7 @@ package Moirai::Monitor;
 use strict;
 use warnings;
 use Data::Dumper;
+use Time::HiRes qw(usleep);
 
 sub new {
    my $that = shift;
@@ -38,7 +39,7 @@ sub run {
          }
       }
 
-      select undef, undef, undef, $frequence;
+      usleep $frequence * 1000000;
    }
 
 }
