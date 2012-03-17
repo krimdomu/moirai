@@ -40,8 +40,8 @@ require Exporter;
 use base qw(Exporter);
 use vars qw(@EXPORT);
 
-use Rex::Commands::Process;
 use Moirai::Monitor;
+use Moirai::Helper::Process;
 use Data::Dumper;
 use base qw(Moirai::Monitor);
     

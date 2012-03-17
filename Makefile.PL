@@ -1,7 +1,6 @@
 use ExtUtils::MakeMaker;
 
 my %deps = (
-                  'Rex' => '0.24',
                   'Net::SMTP_auth' => 0,
                   'Net::SMTP_auth::SSL' => 0,
                   'LWP::UserAgent' => 0,

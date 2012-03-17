@@ -29,7 +29,7 @@ package Moirai::Process;
 use strict;
 use warnings;
 
-use Rex::Commands::Process;
+use Moirai::Helper::Process;
 
 sub new {
    my $that = shift;
